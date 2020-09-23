@@ -40,11 +40,17 @@ Drawing.prototype.updateShapeList = function (addedForm, currentShape, editingMo
     list.prepend(button);
     let span = document.createElement("span");
     span.setAttribute('class', 'glyphicon glyphicon-remove-sign');
-    let text = document.createTextNode(`${
+    let textLineOrRect = document.createTextNode(`${
         editingMode === 1 ? ' Line' : editingMode === 0 ? ' Rectangle' : ' Circle'}(${
         currentShape.initX},${currentShape.initY},${
         currentShape.finalX},${currentShape.finalY})`);
-    span.appendChild(text);
+    let textCircle = document.createTextNode(` Circle(${
+        currentShape.initX},${
+        currentShape.initY},${
+        editingMode === 2 && 
+        addedForm.getRadius().toFixed(2)},0,2PI)`);
+
+    span.appendChild(editingMode === 2 ? textCircle : textLineOrRect);
     button.appendChild(span);
     removeElementOnClick(this, addedForm, span, button);
 }
