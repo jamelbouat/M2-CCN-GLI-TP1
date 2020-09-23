@@ -40,7 +40,6 @@ class Rectangle extends Form {
     getHeight() {
         return this.finalY - this.initY;
     }
-
 }
 
 class Line extends Form {
@@ -60,5 +59,20 @@ class Line extends Form {
     getFinalY() {
         return this.finalY;
     }
+}
 
+class Circle extends Form {
+    constructor(lineArgs) {
+        super(lineArgs.lineWidth, lineArgs.color);
+        Object.assign(this, lineArgs)
+    }
+    getInitX() {
+        return this.initX;
+    }
+    getInitY() {
+        return this.initY;
+    }
+    getRadius() {
+        return Math.abs(this.finalX - this.initX);
+    }
 }

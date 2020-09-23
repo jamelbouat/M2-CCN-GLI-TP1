@@ -1,4 +1,4 @@
-let editingMode = {rect: 0, line: 1};
+let editingMode = {rect: 0, line: 1, circle: 2};
 
 let pencilWidgets = {
 	currColour : document.getElementById('colour'),
@@ -36,7 +36,10 @@ class Pencil {
 		if (this.currEditingMode === editingMode.rect) {
 			this.newForm = new Rectangle(this.currentShape);
 		}
-		this.drawing.addForm(this.newForm );
+		if (this.currEditingMode === editingMode.circle) {
+			this.newForm = new Circle(this.currentShape);
+		}
+		this.drawing.addForm(this.newForm);
 		this.drawing.paint(this.ctx, this.canvas);
 		this.drawing.deleteLastElement();
 	}
@@ -55,11 +58,15 @@ class Pencil {
 Pencil.prototype.listenToChanges = function () {
 	let butRect = document.getElementById('butRect');
 	let butLine = document.getElementById('butLine');
+	let butCircle = document.getElementById('butCircle');
 	butRect.addEventListener('click', () => {
 		this.currEditingMode = editingMode.rect;
 	})
 	butLine.addEventListener('click', () => {
 		this.currEditingMode = editingMode.line;
+	})
+	butCircle.addEventListener('click', () => {
+		this.currEditingMode = editingMode.circle;
 	})
 	pencilWidgets.currColour.onchange = () => this.currColour = pencilWidgets.currColour.value;
 	pencilWidgets.currLineWidth.onchange = () => this.currLineWidth = pencilWidgets.currLineWidth.value;

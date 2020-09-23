@@ -16,6 +16,14 @@ Line.prototype.paint = function(ctx) {
     ctx.stroke();
 };
 
+Circle.prototype.paint = function(ctx) {
+    ctx.strokeStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.getInitX(), this.getInitY(), this.getRadius(), 0, 2 * Math.PI);
+    ctx.lineWidth = this.lineWidth;
+    ctx.stroke();
+}
+
 Drawing.prototype.paint = function(ctx, canvas) {
     ctx.fillStyle = '#F0F0F0';
     ctx.fillRect(0, 0,   canvas.width, canvas.height);
@@ -33,7 +41,7 @@ Drawing.prototype.updateShapeList = function (addedForm, currentShape, editingMo
     let span = document.createElement("span");
     span.setAttribute('class', 'glyphicon glyphicon-remove-sign');
     let text = document.createTextNode(`${
-        editingMode === 1 ? ' Line' : ' Rectangle'}(${
+        editingMode === 1 ? ' Line' : editingMode === 0 ? ' Rectangle' : ' Circle'}(${
         currentShape.initX},${currentShape.initY},${
         currentShape.finalX},${currentShape.finalY})`);
     span.appendChild(text);
