@@ -73,6 +73,6 @@ class Circle extends Form {
         return this.initY;
     }
     getRadius() {
-        return Math.abs(this.finalX - this.initX);
+        return Math.abs(this.finalX - this.initX) / 0.707;
     }
 }
