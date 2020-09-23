@@ -50,7 +50,8 @@ class Pencil {
 
 		this.drawing.addForm(this.newForm );
 		this.drawing.paint(this.ctx, this.canvas);
-		this.drawing.updateShapeList(this.newForm , this.currentShape, this.currEditingMode);
+		// Check for the mousedown event inside the canvas
+		this.currentShape["initX"] !== undefined && this.drawing.updateShapeList(this.newForm , this.currentShape, this.currEditingMode);
 		this.currentShape = {};
 	}
 }
